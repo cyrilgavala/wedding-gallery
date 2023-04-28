@@ -1,0 +1,60 @@
+.root {
+  border: var(--color-navy) 2px solid;
+  border-radius: 1rem;
+  padding: 2rem;
+  background-color: var(--color-light-blue);
+}
+
+@media screen and (orientation: landscape) {
+  .root {
+    width: 50%;
+  }
+}
+
+@media screen and (orientation: portrait) {
+  .root {
+    width: 80%;
+  }
+}
+
+.content {
+  background-color: var(--color-navy);
+  padding: 2rem;
+  border-radius: 1rem;
+}
+
+.content > h2 {
+  padding-inline: 0.5rem;
+  font-size: 1.5rem;
+}
+
+.content > h4 {
+  font-size: 1.25rem;
+}
+
+.content * {
+  color: var(--color-light-blue);
+}
+
+.image {
+  background-position: center;
+  background-size: cover;
+  margin-bottom: 2rem;
+  border-radius: 1rem;
+}
+
+.flex {
+  justify-content: space-evenly;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.centerColumn {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.marginTop {
+  margin-top: 0.5rem;
+}
