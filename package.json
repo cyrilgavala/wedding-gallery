@@ -1,0 +1,22 @@
+{
+  "name": "wedding-gallery",
+  "version": "1.0.0",
+  "description": "Wedding gallery with passphrase-protected sections",
+  "private": true,
+  "workspaces": [
+    "packages/backend",
+    "packages/frontend"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "npm run dev --workspace=packages/backend",
+    "dev:frontend": "npm run dev --workspace=packages/frontend",
+    "build": "npm run build --workspaces",
+    "build:backend": "npm run build --workspace=packages/backend",
+    "build:frontend": "npm run build --workspace=packages/frontend",
+    "generate-hash": "node packages/backend/scripts/generate-hash.js"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

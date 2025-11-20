@@ -1,0 +1,59 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "back": "Back to Home",
+    "download": "Download",
+    "logout": "Logout",
+    "photos": "photo",
+    "photos_plural": "photos",
+    "sections": "section(s)"
+  },
+  "layout": {
+    "title": "Wedding Gallery",
+    "sectionUnlocked": "{{count}} section unlocked",
+    "sectionsUnlocked": "{{count}} sections unlocked",
+    "footer": "Made with ❤️ for a special day"
+  },
+  "home": {
+    "welcome": {
+      "title": "Welcome to Our Wedding Gallery",
+      "description": "Thank you for being part of our special day! Different sections of the gallery are protected with unique passphrases. Enter the passphrase you received to unlock and view the photos."
+    },
+    "galleries": {
+      "title": "Your Galleries",
+      "photoCount": "{{count}} photos"
+    },
+    "unlock": {
+      "title": "Unlock a Gallery Section",
+      "selectSection": "Select Section:",
+      "chooseSection": "Choose a section...",
+      "passphrase": "Passphrase:",
+      "passphraseePlaceholder": "Enter passphrase",
+      "unlockButton": "Unlock Gallery",
+      "verifying": "Verifying...",
+      "errorSelect": "Please select a section and enter the passphrase",
+      "errorInvalid": "Invalid passphrase",
+      "successGranted": "Access granted! Loading gallery..."
+    },
+    "noSections": "No gallery sections are currently configured."
+  },
+  "gallery": {
+    "title": "Gallery",
+    "photoCount": "{{count}} photos",
+    "noPhotos": "No photos found in this section.",
+    "noAccess": "You do not have access to this section.",
+    "loadError": "Failed to load photos.",
+    "loadingGallery": "Loading gallery...",
+    "loadingPhoto": "Loading photo...",
+    "failedLoadPhoto": "Failed to load photo",
+    "clickToGoBack": "Click on title to go back on home page."
+  },
+  "loader": {
+    "loadingGalleries": "Loading your galleries...",
+    "loadingSections": "Loading sections...",
+    "loadingGallery": "Loading gallery...",
+    "loadingPhoto": "Loading photo..."
+  }
+}
+

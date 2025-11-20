@@ -1,0 +1,59 @@
+{
+  "common": {
+    "loading": "Načítava sa...",
+    "error": "Chyba",
+    "back": "Späť na domovskú stránku",
+    "download": "Stiahnuť",
+    "logout": "Odhlásiť",
+    "photos": "fotka",
+    "photos_plural": "fotiek",
+    "sections": "sekcia/sekcií"
+  },
+  "layout": {
+    "title": "Svadobná Galéria",
+    "sectionUnlocked": "{{count}} odomknutá sekcia",
+    "sectionsUnlocked": "{{count}} odomknuté sekcie",
+    "footer": "Vytvorené s ❤️ pre výnimočný deň"
+  },
+  "home": {
+    "welcome": {
+      "title": "Vitajte v našej svadobnej galérii",
+      "description": "Ďakujeme, že ste súčasťou nášho výnimočného dňa! Rôzne sekcie galérie sú chránené jedinečnými heslami. Zadajte heslo, ktoré ste dostali, aby ste mohli vidieť fotky."
+    },
+    "galleries": {
+      "title": "Vaše galérie",
+      "photoCount": "{{count}} fotiek"
+    },
+    "unlock": {
+      "title": "Odomknúť sekciu galérie",
+      "selectSection": "Vyberte sekciu:",
+      "chooseSection": "Vyberte sekciu...",
+      "passphrase": "Heslo:",
+      "passphraseePlaceholder": "Zadajte heslo",
+      "unlockButton": "Odomknúť galériu",
+      "verifying": "Overujem...",
+      "errorSelect": "Prosím vyberte sekciu a zadajte heslo",
+      "errorInvalid": "Nesprávne heslo",
+      "successGranted": "Prístup povolený! Načítavam galériu..."
+    },
+    "noSections": "Momentálne nie sú nakonfigurované žiadne sekcie galérie."
+  },
+  "gallery": {
+    "title": "Galéria",
+    "photoCount": "{{count}} fotiek",
+    "noPhotos": "V tejto sekcii neboli nájdené žiadne fotky.",
+    "noAccess": "Nemáte prístup k tejto sekcii.",
+    "loadError": "Nepodarilo sa načítať fotky.",
+    "loadingGallery": "Načítavam galériu...",
+    "loadingPhoto": "Načítavam fotku...",
+    "failedLoadPhoto": "Nepodarilo sa načítať fotku",
+    "clickToGoBack": "Kliknite na nadpis pre návrat na domovskú stránku."
+  },
+  "loader": {
+    "loadingGalleries": "Načítavam vaše galérie...",
+    "loadingSections": "Načítavam sekcie...",
+    "loadingGallery": "Načítavam galériu...",
+    "loadingPhoto": "Načítavam fotku..."
+  }
+}
+
