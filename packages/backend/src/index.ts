@@ -29,11 +29,16 @@ logger.debug('Helmet security headers enabled');
 app.use(compression());
 logger.debug('Response compression enabled');
 
+// CORS configuration - handle both development and production
+const corsOrigin = process.env.CORS_ORIGIN || 'http://localhost:5173';
 app.use(cors({
-  origin: process.env.CORS_ORIGIN || 'http://localhost:5173',
-  credentials: true
+  origin: corsOrigin,
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  exposedHeaders: ['Set-Cookie']
 }));
-logger.debug('CORS configured', { origin: process.env.CORS_ORIGIN || 'http://localhost:5173' });
+logger.debug('CORS configured', { origin: corsOrigin });
 
 app.use(express.json());
 
@@ -61,25 +66,36 @@ app.use((req, res, next) => {
   next();
 });
 
+// In production, trust the proxy (Heroku uses proxies) - MUST be set before session
+if (process.env.NODE_ENV === 'production') {
+  app.set('trust proxy', 1);
+  logger.debug('Trust proxy enabled for production');
+}
+
 // Session configuration
 const sessionSecret = process.env.SESSION_SECRET || 'fallback-secret-change-in-production';
 if (!process.env.SESSION_SECRET) {
   logger.warn('SESSION_SECRET not set - using fallback (NOT PRODUCTION SAFE!)');
 }
 
-app.use(session({
+const sessionConfig = {
   secret: sessionSecret,
   resave: false,
   saveUninitialized: false,
   cookie: {
     secure: process.env.NODE_ENV === 'production',
     httpOnly: true,
-    maxAge: 24 * 60 * 60 * 1000 // 24 hours
+    maxAge: 24 * 60 * 60 * 1000, // 24 hours
+    sameSite: 'lax' as const
   }
-}));
+};
+
+app.use(session(sessionConfig));
 logger.debug('Session management configured', {
-  secure: process.env.NODE_ENV === 'production',
-  maxAge: '24 hours'
+  secure: sessionConfig.cookie.secure,
+  sameSite: sessionConfig.cookie.sameSite,
+  maxAge: '24 hours',
+  trustProxy: process.env.NODE_ENV === 'production'
 });
 
 // Serve static files from frontend build in production (BEFORE API routes)
