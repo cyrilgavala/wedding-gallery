@@ -19,7 +19,11 @@ logger.info('Starting Wedding Gallery Backend', {
 });
 
 // Middleware
-app.use(helmet());
+// Configure Helmet with relaxed CSP for production static assets
+app.use(helmet({
+  contentSecurityPolicy: process.env.NODE_ENV === 'production' ? false : undefined,
+  crossOriginEmbedderPolicy: false
+}));
 logger.debug('Helmet security headers enabled');
 
 app.use(compression());
@@ -78,7 +82,30 @@ logger.debug('Session management configured', {
   maxAge: '24 hours'
 });
 
-// Routes
+// Serve static files from frontend build in production (BEFORE API routes)
+if (process.env.NODE_ENV === 'production') {
+  const frontendPath = path.join(__dirname, '../../frontend/dist');
+  logger.info('Serving static files from', { path: frontendPath });
+
+  // Serve static files with proper MIME types
+  app.use(express.static(frontendPath, {
+    maxAge: '1d',
+    etag: true,
+    lastModified: true,
+    setHeaders: (res, filePath) => {
+      // Ensure correct MIME types for assets
+      if (filePath.endsWith('.js')) {
+        res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
+      } else if (filePath.endsWith('.css')) {
+        res.setHeader('Content-Type', 'text/css; charset=utf-8');
+      } else if (filePath.endsWith('.json')) {
+        res.setHeader('Content-Type', 'application/json; charset=utf-8');
+      }
+    }
+  }));
+}
+
+// API Routes
 app.get('/api/health', (req, res) => {
   logger.debug('Health check requested');
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
@@ -90,14 +117,9 @@ logger.info('Routes registered', {
   routes: ['/api/health', '/api/auth', '/api/gallery']
 });
 
-// Serve static files from frontend build in production
+// SPA fallback - serve index.html for all non-API routes (AFTER API routes)
 if (process.env.NODE_ENV === 'production') {
   const frontendPath = path.join(__dirname, '../../frontend/dist');
-  logger.info('Serving static files from', { path: frontendPath });
-
-  app.use(express.static(frontendPath));
-
-  // Serve index.html for all non-API routes (SPA fallback)
   app.get('*', (req, res) => {
     res.sendFile(path.join(frontendPath, 'index.html'));
   });
