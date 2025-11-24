@@ -14,7 +14,13 @@
     "build": "npm run build --workspaces",
     "build:backend": "npm run build --workspace=packages/backend",
     "build:frontend": "npm run build --workspace=packages/frontend",
-    "generate-hash": "node packages/backend/scripts/generate-hash.js"
+    "generate-hash": "node packages/backend/scripts/generate-hash.js",
+    "heroku-postbuild": "npm run build:frontend && npm run build:backend",
+    "start:prod": "npm run start --workspace=packages/backend"
+  },
+  "engines": {
+    "node": "20.x",
+    "npm": "10.x"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"

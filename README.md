@@ -232,7 +232,36 @@ See `packages/frontend/src/hooks/README.md` for detailed documentation.
 
 ## 🌐 Deployment
 
-### Backend (Railway, Heroku, Render)
+### Deploy to Heroku (Full Stack - Recommended)
+
+This app is configured for easy Heroku deployment with both frontend and backend together.
+
+**Manual Deploy:**
+```bash
+# 1. Install Heroku CLI and login
+heroku login
+
+# 2. Create app
+heroku create your-wedding-gallery
+
+# 3. Set environment variables
+heroku config:set NODE_ENV=production
+heroku config:set SESSION_SECRET=$(openssl rand -base64 32)
+heroku config:set CORS_ORIGIN=https://your-wedding-gallery.herokuapp.com
+heroku config:set DROPBOX_ACCESS_TOKEN=your-token
+heroku config:set DROPBOX_CLIENT_ID=your-client-id
+heroku config:set DROPBOX_CLIENT_SECRET=your-client-secret
+heroku config:set GALLERY_SECTIONS="section1:hash1,section2:hash2"
+heroku config:set DROPBOX_FOLDERS="/folder1,/folder2"
+
+# 4. Deploy
+git push heroku main
+
+# 5. Open your app
+heroku open
+```
+
+### Alternative: Backend (Railway, Render, etc.)
 ```bash
 npm run build:backend
 cd packages/backend
@@ -249,7 +278,7 @@ Environment variables:
 - `DROPBOX_FOLDERS=</path1,/path2>`
 - `CORS_ORIGIN=<your-frontend-url>`
 
-### Frontend (Vercel, Netlify, Cloudflare Pages)
+### Alternative: Frontend Only (Vercel, Netlify, Cloudflare Pages)
 ```bash
 npm run build:frontend
 ```

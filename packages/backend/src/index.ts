@@ -3,6 +3,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import compression from 'compression';
 import session from 'express-session';
+import path from 'path';
 import { authRouter } from './routes/auth';
 import { galleryRouter } from './routes/gallery';
 import { errorHandler } from './middleware/errorHandler';
@@ -88,6 +89,19 @@ app.use('/api/gallery', galleryRouter);
 logger.info('Routes registered', {
   routes: ['/api/health', '/api/auth', '/api/gallery']
 });
+
+// Serve static files from frontend build in production
+if (process.env.NODE_ENV === 'production') {
+  const frontendPath = path.join(__dirname, '../../frontend/dist');
+  logger.info('Serving static files from', { path: frontendPath });
+
+  app.use(express.static(frontendPath));
+
+  // Serve index.html for all non-API routes (SPA fallback)
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(frontendPath, 'index.html'));
+  });
+}
 
 // Error handling
 app.use(errorHandler);
